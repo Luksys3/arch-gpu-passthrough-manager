@@ -2,6 +2,8 @@
 
 Bash utility designed for Arch Linux users with multi-GPU setups (AMD/NVIDIA/iGPU). This script automates the isolation of specific GPUs for VFIO passthrough while maintaining a "Rescue" boot option to prevent lockouts.
 
+![Demo](assets/demo.png)
+
 ## Features
 
 - **Rescue Kernel Logic:** Automatically configures IOMMU and VFIO seizure for your "Target" kernel, while blacklisting VFIO and stripping IOMMU flags from all other installed kernels. This ensures that if you accidentally pass through all GPUs, you can simply reboot and select a secondary kernel from the `systemd-boot` menu to recover your system.
