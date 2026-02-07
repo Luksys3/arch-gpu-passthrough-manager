@@ -26,8 +26,8 @@ sudo ./gpu-manager.sh
 ```
 
 **Commands:**
-- Use `-X` to return a GPU to the **Host** (e.g., `-1`).
 - Use `+X` to pass a GPU to **Passthrough/VFIO** (e.g., `+2`).
+- Use `-X` to return a GPU to the **Host** (e.g., `-1`).
 - You can combine commands: `+2 +3 -1`.
 
 **Select Kernel:** 
