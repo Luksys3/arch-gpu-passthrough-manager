@@ -4,11 +4,11 @@ Bash utility designed for Arch Linux users with multi-GPU setups (AMD/NVIDIA/iGP
 
 ## Features
 
-- **Rescue Kernel Logic:** Automatically configures IOMMU and VFIO seizure for your "Target" kernel, while blacklisting VFIO and stripping IOMMU flags from all other installed kernels to ensure you always have a bootable "Safe Mode."
-- **Dashboard Interface:** Real-time detection of GPUs, their PCI IDs, and the kernel driver currently in use (e.g., `amdgpu`, `nvidia`, or `vfio-pci`).
-- **Standardized VFIO Config:** Manages `/etc/modprobe.d/vfio.conf` with proper `softdep` (soft dependencies) to ensure `vfio-pci` claims cards before host drivers.
-- **Smart mkinitcpio Integration:** Updates the `MODULES` array in `mkinitcpio.conf` to ensure correct load order without disturbing your other modules (encryption, filesystems, etc.).
-- **Backups:** Performs timestamped backups of all modified files (`.bak.UNIX_TIMESTAMP`).
+- **Rescue Kernel Logic:** Automatically configures IOMMU and VFIO seizure for your "Target" kernel, while blacklisting VFIO and stripping IOMMU flags from all other installed kernels. This ensures that if you accidentally pass through all GPUs, you can simply reboot and select a secondary kernel from the `systemd-boot` menu to recover your system.
+- **Dashboard Interface:** Detection of GPUs, their PCI IDs, and the kernel driver currently in use (e.g., `amdgpu`, `nvidia`, or `vfio-pci`).
+- **Standardized VFIO Config:** Manages `/etc/modprobe.d/vfio.conf` with proper `softdep` (soft dependencies) for `amdgpu`, `nvidia`, and `nouveau` to ensure `vfio-pci` claims cards before host drivers can interfere.
+- **Smart mkinitcpio Integration:** Updates the `MODULES` array in `mkinitcpio.conf` to ensure the correct load order without disturbing other critical modules (encryption, filesystems, etc.).
+- **Automated Backups:** Performs timestamped backups of all modified files (e.g., `.bak.1738947600`). If you need to revert, check `/boot/loader/entries/` or `/etc/mkinitcpio.conf.bak.*`.
 
 ## Requirements
 
@@ -31,9 +31,4 @@ sudo ./gpu-manager.sh
 **Select Kernel:** 
 The script will prompt you to choose which boot entry should be the "Passthrough" entry. All others will be set as Rescue entries.
 
-## Other
-
-- **The Rescue Mechanism:** If you accidentally pass through all GPUs (including your host card), simply reboot and select your secondary kernel from the `systemd-boot` menu. The script explicitly disables VFIO on non-target kernels to allow you to recover your system.
-- **Backups:** Every time the script modifies a file, a copy is saved with a Unix timestamp. If you need to revert, check `/boot/loader/entries/` or `/etc/mkinitcpio.conf.bak.*`.
-- **NVIDIA Users:** The script handles `softdep` for `nvidia` and `nouveau` automatically to prevent host driver "clipping."
 
