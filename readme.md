@@ -26,9 +26,9 @@ sudo ./gpu-manager.sh
 ```
 
 **Commands:**
-- Use `+X` to return a GPU to the **Host** (e.g., `+1`).
-- Use `-X` to pass a GPU to **Passthrough/VFIO** (e.g., `-2`).
-- You can combine commands: `-2 -3 +1`.
+- Use `-X` to return a GPU to the **Host** (e.g., `-1`).
+- Use `+X` to pass a GPU to **Passthrough/VFIO** (e.g., `+2`).
+- You can combine commands: `+2 +3 -1`.
 
 **Select Kernel:** 
 The script will prompt you to choose which boot entry should be the "Passthrough" entry. All others will be set as Rescue entries.
